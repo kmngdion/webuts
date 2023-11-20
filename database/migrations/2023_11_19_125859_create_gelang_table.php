@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('gelang', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->decimal('harga'); // Tambahkan kolom harga
+            $table->foreignId('jenisbarang_id')->constrained('jenisbarang'); // Tambahkan kolom jenisbarang_id
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

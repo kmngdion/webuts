@@ -12,12 +12,6 @@
     </div>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-        </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="{{ asset('img/Anting1.jpeg') }}" class="d-block mx-auto" style="max-width: 50%;" alt="Anting 1">
@@ -45,10 +39,9 @@
     <script>
         // Script untuk menginisialisasi karusel
         $(document).ready(function(){
-            $('.carousel').carousel({
-                interval: 3000, // Ubah nilai sesuai kebutuhan (dalam milidetik)
-                pause: false // Menghilangkan pause on hover
-            });
+            setInterval(function(){
+                $('#carouselExampleIndicators').carousel('next');
+            }, 2000); // Ubah nilai menjadi 2000 (2 detik)
         });
     </script>
     

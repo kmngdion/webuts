@@ -11,24 +11,25 @@ class GelangController extends Controller
     public function index()
     {
         $barang = DB::table('gelang')
-        ->select("barang.id","idbarang","barang.nama", "barang.harga","jenisbarang_id","jenisbarang.nama AS jenisbarang_nama")
-        ->join("jenisbarang","jenisbarang.id","=","barang.jenisbarang_id")
-        ->get();
+            ->select('gelang.id', 'gelang.nama','gelang.harga', 'jenisbarang_id', 'jenisbarang.nama AS jenisbarang_nama')
+            ->join('jenisbarang', 'jenisbarang.id', '=', 'gelang.jenisbarang_id')
+            ->get();
+
         $jenisbarang = DB::table('jenisbarang')->get();
 
-        return view('barang.index', ['databarang' => $barang]);
-
+        return view('gelang.index', ['databarang' => $barang, 'jenisbarang' => $jenisbarang]);
     }
+
 
     public function create()
     {
         $jenisbarang = DB::table('jenisbarang')->get();
-        return view('barang.create', ['jenisbarang' => $jenisbarang]);
+        return view('gelang.create', ['jenisbarang' => $jenisbarang]);
     }
     public function store(Request $request)
     {
         DB::table('gelang')->insert([
-            'idbarang' => $request->idbarang,
+            'id' => $request->id,
             'nama' => $request->nama,
             'harga' => $request->harga,
             'jenisbarang_id' => $request->jenisbarang
@@ -42,7 +43,7 @@ class GelangController extends Controller
         DB::table('gelang')
         ->where('id', $id)
         ->update([
-            'idbarang' => $request->idbarang,
+            'id' => $request->id,
             'nama' => $request->nama,
             'harga' => $request->harga,
             'jenisbarang_id' => $request->jenisbarang,
@@ -55,25 +56,25 @@ class GelangController extends Controller
     public function edit($id)
     {
         $barang = DB::table('gelang')
-        ->select("barang.id","idbarang","barang.nama","barang.harga","jenisbarang_id","jenisbarang.nama AS jenisbarang_nama")
-        ->join("jenisbarang","jenisbarang.id","=","barang.jenisbarang_id")
-        ->where("barang.id",$id)
+        ->select("gelang.id","gelang.nama","gelang.harga","jenisbarang_id","jenisbarang.nama AS jenisbarang_nama")
+        ->join("jenisbarang","jenisbarang.id","=","gelang.jenisbarang_id")
+        ->where("gelang.id",$id)
         ->first();
         $jenisbarang = DB::table('jenisbarang')->get();
 
-        return view('barang.edit', ['databarang' => $barang, 'id' => $id, 'jenisbarang' => $jenisbarang]);
+        return view('gelang.edit', ['databarang' => $barang, 'id' => $id, 'jenisbarang' => $jenisbarang]);
     }
 
     public function show($id)
     {
         $barang = DB::table('gelang')
-        ->select("barang.id","idbarang","barang.nama","barang.harga","jenisbarang_id","jenisbarang.nama AS jenisbarang_nama")
-        ->join("jenisbarang","jenisbarang.id","=","barang.jenisbarang_id")
-        ->where("barang.id",$id)
+        ->select("gelang.id","gelang.nama","gelang.harga","jenisbarang_id","jenisbarang.nama AS jenisbarang_nama")
+        ->join("jenisbarang","jenisbarang.id","=","gelang.jenisbarang_id")
+        ->where("gelang.id",$id)
         ->first();
         $jenisbarang = DB::table('jenisbarang')->get();
 
-        return view('barang.show', ['databarang' => $barang, 'id' => $id, 'jenisbarang' => $jenisbarang]);
+        return view('gelang.show', ['databarang' => $barang, 'id' => $id, 'jenisbarang' => $jenisbarang]);
     }
     public function destroy($id)
     {

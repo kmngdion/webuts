@@ -68,13 +68,13 @@ class AntingController extends Controller
     public function show($id)
     {
         $barang = DB::table('anting')
-        ->select("barang.id","idbarang","barang.nama","barang.harga","jenisbarang_id","jenisbarang.nama AS jenisbarang_nama")
-        ->join("jenisbarang","jenisbarang.id","=","barang.jenisbarang_id")
-        ->where("barang.id",$id)
+        ->select("anting.id","anting.nama","anting.harga","jenisbarang_id","jenisbarang.nama AS jenisbarang_nama")
+        ->join("jenisbarang","jenisbarang.id","=","anting.jenisbarang_id")
+        ->where("anting.id",$id)
         ->first();
         $jenisbarang = DB::table('jenisbarang')->get();
 
-        return view('barang.show', ['databarang' => $barang, 'id' => $id, 'jenisbarang' => $jenisbarang]);
+        return view('anting.show', ['databarang' => $barang, 'id' => $id, 'jenisbarang' => $jenisbarang]);
     }
     public function destroy($id)
     {
